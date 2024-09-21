@@ -55,24 +55,71 @@ console.log(checkForSpam("SaLe"));
 console.log(checkForSpam("SpAm"));
 console.log(checkForSpam("No S-word"));
 
-let input;
-const numbers = [];
-let total = 0;
+// let input;
+// const numbers = [];
+// let total = 0;
+// for (let i = 0; i <= 1000; i++) {
+//   input = prompt("Введіть число:");
+//   if (input === null) {
+//     break;
+//   }
+//   input = Number.parseInt(input);
+//   if (isNaN(input)) {
+//     alert("Було введено не число, попробуйте ще раз");
+//     continue;
+//   }
+//   numbers.push(input);
+// }
+// for (const number of numbers) {
+//   total += number;
+// }
+// console.log(`Сумма введених чисел: ${total}`);
+
+let logins = ["Pizzaman333", "Anton234", "Misha565", "SuperSnipper"];
+const isLoginValid = function (login) {
+  let message;
+  if (login.length < 4 || login.length > 16) {
+    message = false;
+  } else {
+    message = true;
+  }
+  return message;
+};
+let result;
+const isLoginUnique = function (allLogins, login) {
+  for (let i = 0; i <= allLogins.length; i++) {
+    if (allLogins[i] === login) {
+      result = false;
+      return result;
+    } else {
+      result = true;
+    }
+  }
+  return result;
+};
+const addLogin = function (allLogins, login) {
+  if (isLoginValid(login) === false) {
+    alert("Помилка! Логін повинен бути від 4 до 16 символів.");
+    return;
+  }
+  if (isLoginUnique(allLogins, login) === false) {
+    alert("Такий логін уже використовується!");
+    return;
+  }
+  logins.push(login);
+  alert("Логін успішно доданий!");
+  return "ok";
+};
+let login;
 for (let i = 0; i <= 1000; i++) {
-  input = prompt("Введіть число:");
-  if (input === null) {
+  login = prompt("Введіть логін:");
+  if (login === null) {
+    alert("Скасовано користувачем.");
     break;
   }
-  input = Number.parseInt(input);
-  if (isNaN(input)) {
-    alert("Було введено не число, попробуйте ще раз");
-    continue;
+  const result = addLogin(logins, login);
+  if (result === "ok") {
+    break;
   }
-  numbers.push(input);
-  console.log(numbers);
 }
-for (const number of numbers) {
-  total += number;
-}
-console.log(`Сумма введених чисел: ${total}`);
-
+console.log(logins);
